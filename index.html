@@ -1,170 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenSpec-Driven Development | Roadmap</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        obsidian: '#0B0E11',
-                        accent: '#0070F3',
-                        success: '#10B981',
-                        slate: {
-                            850: '#1e293b',
-                            950: '#0f172a'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
-        
-        body { background-color: #0B0E11; color: #E2E8F0; }
-        .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-        .timeline-line { background: linear-gradient(to bottom, #0070F3, #10B981); }
-        .task-checked { text-decoration: line-through; opacity: 0.5; }
-        .cli-code { font-family: 'JetBrains Mono', monospace; }
-        
-        .phase-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .phase-card:hover { transform: translateY(-4px); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Interactive SDLC roadmap for OpenSpec-driven development across VS Code, Android Studio, terminal, testing, and release.">
+<title>OpenSpec Development Roadmap | Interactive SDLC</title>
+<style>
+:root{--bg:#0b1017;--panel:#121b27;--panel2:#172333;--line:#2b3a4d;--text:#e7eef7;--muted:#9aabc0;--blue:#6bb6ff;--green:#55d6a0;--yellow:#ffd27a;--red:#ff8e8e}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.top{position:sticky;top:0;z-index:5;background:#0b1017ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1200px;margin:auto;padding:0 22px}.topin{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}.brand{font-size:19px;font-weight:800;letter-spacing:-.4px}.brand span{color:var(--blue)}.sub{font-size:12px;color:var(--muted)}.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:var(--text);padding:8px 12px;font-weight:650;font-size:13px}.btn.primary{background:var(--blue);color:#06111d;border-color:var(--blue)}.btn:hover{filter:brightness(1.12)}
+.hero{padding:38px 0 24px}.eyebrow{color:var(--green);text-transform:uppercase;letter-spacing:1.7px;font-size:11px;font-weight:800}.hero h1{font-size:clamp(28px,4vw,44px);line-height:1.1;letter-spacing:-1.2px;margin:8px 0 12px}.hero p{max-width:800px;color:var(--muted);margin:0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}.stat,.panel,.phase{background:var(--panel);border:1px solid var(--line);border-radius:14px}.stat{padding:14px}.stat strong{display:block;font-size:23px}.stat span{font-size:12px;color:var(--muted)}
+.progress{height:7px;background:#263447;border-radius:99px;overflow:hidden;margin-top:10px}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));transition:width .2s}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:22px;padding:18px 0 60px}.sidebar{align-self:start;position:sticky;top:84px}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:14px}.navlist{display:grid;gap:5px}.navlist button{text-align:left;border:1px solid transparent;background:transparent;color:var(--muted);padding:9px 10px;border-radius:8px}.navlist button:hover,.navlist button.active{background:var(--panel2);border-color:var(--line);color:var(--text)}.navlist small{display:block;font-size:11px;color:var(--muted)}
+.phase{margin-bottom:14px;overflow:hidden;scroll-margin-top:90px}.phasehead{display:flex;gap:12px;align-items:flex-start;padding:18px;cursor:pointer}.num{flex:0 0 36px;height:36px;display:grid;place-items:center;border-radius:10px;background:#18324b;color:var(--blue);font-weight:800}.phase h2{font-size:17px;margin:0 0 3px}.phasehead p{margin:0;color:var(--muted);font-size:13px}.phasebody{border-top:1px solid var(--line);padding:18px;display:none}.phase.open .phasebody{display:block}.phase.open .chev{transform:rotate(180deg)}.phasehead .chev{margin-left:auto;color:var(--muted);transition:transform .2s}.meta{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.tag{font-size:11px;border:1px solid var(--line);color:var(--muted);padding:3px 8px;border-radius:99px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}.subpanel{background:#0d1520;border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}.subpanel h4{margin:0 0 10px;font-size:13px;color:var(--blue)}.check{display:flex;gap:9px;align-items:flex-start;margin:9px 0;color:#d4dfec;font-size:13px}.check input{margin-top:4px;accent-color:var(--green)}.check.done span{text-decoration:line-through;color:var(--muted)}.codehead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:7px}.codehead b{font-size:12px}.copy{font-size:11px;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel2);color:var(--text)}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#060b11;border:1px solid #1d2a39;padding:12px;border-radius:8px;color:#b8e0ff;font:12px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;margin:0 0 10px}.note{border-left:3px solid var(--yellow);background:#2a2418;padding:10px 12px;border-radius:0 8px 8px 0;font-size:12px;color:#f2dfb7;margin:12px 0}.danger{border-left-color:var(--red);background:#2b1a20;color:#ffd1d1}.good{border-left-color:var(--green);background:#122820;color:#c9f5df}.text{font-size:13px;color:#cbd7e5}.text ul{padding-left:18px}.text li{margin:5px 0}.result{font-size:12px;color:var(--green);margin-top:8px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.toolbar input,.toolbar select{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:9px 11px;border-radius:8px}.toolbar input{flex:1;min-width:180px}.footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:12px}.hide{display:none!important}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{position:static}.navlist{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}.topin{align-items:flex-start}.top-actions{justify-content:flex-end}}
+@media(max-width:500px){.wrap{padding:0 14px}.stats{gap:7px}.stat{padding:10px}.hero{padding-top:27px}.topin{flex-direction:column}.navlist{grid-template-columns:1fr 1fr}}
+</style>
 </head>
-<body class="font-sans antialiased selection:bg-accent selection:text-white">
-
-    <!-- Header -->
-    <header class="sticky top-0 z-50 glass p-6">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold tracking-tight">OpenSpec <span class="text-accent">Roadmap</span></h1>
-                <p class="text-sm text-slate-400">v1.0.0 | Developer Workflow</p>
-            </div>
-            <div class="h-1.5 w-32 bg-slate-800 rounded-full overflow-hidden">
-                <div class="h-full bg-accent w-1/3"></div>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-4xl mx-auto px-6 py-12">
-        <!-- Timeline Container -->
-        <div class="relative">
-            <div class="absolute left-4 md:left-1/2 h-full w-0.5 timeline-line opacity-30"></div>
-
-            <!-- Phases -->
-            <div class="space-y-12">
-                
-                <!-- Phase 1 -->
-                <div class="relative flex flex-col md:flex-row gap-8">
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent z-10 shadow-[0_0_15px_rgba(0,112,243,0.6)]"></div>
-                    <div class="md:w-1/2 pl-12 md:pl-0 md:pr-12">
-                        <div class="glass p-6 rounded-2xl phase-card">
-                            <h2 class="text-xl font-semibold mb-2">01. Initialization</h2>
-                            <p class="text-slate-400 text-sm mb-4">Foundation setup in IDE terminal.</p>
-                            <code class="cli-code block bg-black p-3 rounded text-xs text-accent mb-4">npm install -g @fission-ai/openspec@latest && openspec init</code>
-                            <div class="space-y-2">
-                                <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" class="w-4 h-4 accent-success" checked> <span>CLI Installation</span></label>
-                                <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" class="w-4 h-4 accent-success"> <span>Directory Config</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="md:w-1/2"></div>
-                </div>
-
-                <!-- Phase 2 -->
-                <div class="relative flex flex-col md:flex-row-reverse gap-8">
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent z-10 shadow-[0_0_15px_rgba(0,112,243,0.6)]"></div>
-                    <div class="md:w-1/2 pl-12 md:pl-12">
-                        <div class="glass p-6 rounded-2xl phase-card">
-                            <h2 class="text-xl font-semibold mb-2">02. Exploration</h2>
-                            <p class="text-slate-400 text-sm mb-4">Conversational goal definition.</p>
-                            <code class="cli-code block bg-black p-3 rounded text-xs text-accent mb-4">/opsx:explore [feature description]</code>
-                            <div class="grid grid-cols-1 gap-2">
-                                <div class="bg-slate-950 p-3 rounded text-sm hover:border-accent border border-transparent">Feature Brainstorming</div>
-                                <div class="bg-slate-950 p-3 rounded text-sm hover:border-accent border border-transparent">Technical Debt ID</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="md:w-1/2"></div>
-                </div>
-
-                <!-- Phase 3 -->
-                <div class="relative flex flex-col md:flex-row gap-8">
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent z-10 shadow-[0_0_15px_rgba(0,112,243,0.6)]"></div>
-                    <div class="md:w-1/2 pl-12 md:pl-0 md:pr-12">
-                        <div class="glass p-6 rounded-2xl phase-card">
-                            <h2 class="text-xl font-semibold mb-2">03. Drafting</h2>
-                            <p class="text-slate-400 text-sm mb-4">Convert dialogue into markdown docs.</p>
-                            <code class="cli-code block bg-black p-3 rounded text-xs text-accent mb-4">/opsx:propose</code>
-                            <div class="text-sm text-slate-300 space-y-2">
-                                <p>• proposal.md</p>
-                                <p>• design.md</p>
-                                <p>• spec.md</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Phase 4 -->
-                <div class="relative flex flex-col md:flex-row-reverse gap-8">
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-accent z-10 shadow-[0_0_15px_rgba(0,112,243,0.6)]"></div>
-                    <div class="md:w-1/2 pl-12 md:pl-12">
-                        <div class="glass p-6 rounded-2xl phase-card">
-                            <h2 class="text-xl font-semibold mb-2">04. Verification</h2>
-                            <p class="text-slate-400 text-sm mb-4">Context engineering & decomposition.</p>
-                            <div class="space-y-3">
-                                <div class="flex items-center gap-2 p-2 bg-slate-950 rounded">
-                                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-                                    <span class="text-sm">Logic Flow Audit</span>
-                                </div>
-                                <div class="flex items-center gap-2 p-2 bg-slate-950 rounded">
-                                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-                                    <span class="text-sm">Refine Impl Tools</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Phase 5 -->
-                <div class="relative flex flex-col md:flex-row gap-8">
-                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-success z-10 shadow-[0_0_15px_rgba(16,185,129,0.6)]"></div>
-                    <div class="md:w-1/2 pl-12 md:pl-0 md:pr-12">
-                        <div class="glass p-6 rounded-2xl phase-card border-success/30">
-                            <h2 class="text-xl font-semibold mb-2 text-success">05. Implementation</h2>
-                            <p class="text-slate-400 text-sm mb-4">Production-ready code injection.</p>
-                            <code class="cli-code block bg-black p-3 rounded text-xs text-success mb-4">/opsx:apply --range [1-10] && /opsx:archive</code>
-                            <div class="text-xs bg-slate-950 p-4 rounded text-slate-500">
-                                Status: Ready for Delta Specification.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </main>
-
-    <script>
-        // Interactivity: Toggle checkbox styles
-        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-            cb.addEventListener('change', (e) => {
-                const label = e.target.parentElement.querySelector('span');
-                if(e.target.checked) {
-                    label.classList.add('task-checked');
-                } else {
-                    label.classList.remove('task-checked');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+<body>
+<header class="top"><div class="wrap topin">
+  <div><div class="brand">OpenSpec <span>SDLC Roadmap</span></div><div class="sub">Requirements → design → implementation → verified release</div></div>
+  <div class="top-actions"><button class="btn" id="expandAll">Expand all</button><button class="btn" id="collapseAll">Collapse all</button><button class="btn primary" id="reset">Reset checklist</button></div>
+</div></header>
+<main class="wrap">
+<section class="hero">
+  <div class="eyebrow">Interactive developer playbook</div>
+  <h1>Build deliberately. Verify every step.</h1>
+  <p>Use this roadmap to move from a clear requirement to a tested release. It covers OpenSpec-style planning, VS Code, Android Studio, terminal commands, testing, security, Git, and deployment. Expand any phase, check off work, and copy commands as you go.</p>
+  <div class="stats">
+    <div class="stat"><strong id="doneCount">0 / 30</strong><span>Checklist items complete</span><div class="progress"><div id="progressBar"></div></div></div>
+    <div class="stat"><strong>8</strong><span>SDLC phases</span></div>
+    <div class="stat"><strong>3</strong><span>Work surfaces: IDE, terminal, CI</span></div>
+    <div class="stat"><strong>1 rule</strong><span>Never ship without evidence</span></div>
+  </div>
+</section>
+<div class="layout">
+<aside class="sidebar">
+  <div class="panel"><h3>Jump to a phase</h3><div class="navlist" id="navlist"></div></div>
+  <div class="panel"><h3>Choose your environment</h3>
+    <label class="check"><input type="checkbox" id="useVS" checked><span>VS Code (backend, web, specs)</span></label>
+    <label class="check"><input type="checkbox" id="useAndroid" checked><span>Android Studio (Android app)</span></label>
+    <label class="check"><input type="checkbox" id="useGit" checked><span>Git + remote repository</span></label>
+    <p class="sub">Environment selection highlights relevant instructions; it does not install tools or execute commands.</p>
+  </div>
+  <div class="panel"><h3>Definition of done</h3>
+    <div class="check"><input type="checkbox" class="doneGate"><span>Requirements accepted</span></div>
+    <div class="check"><input type="checkbox" class="doneGate"><span>Tests pass locally and in CI</span></div>
+    <div class="check"><input type="checkbox" class="doneGate"><span>Security and data migration reviewed</span></div>
+    <div class="check"><input type="checkbox" class="doneGate"><span>Rollback and release notes ready</span></div>
+  </div>
+</aside>
+<section>
+<div class="toolbar"><input id="search" placeholder="Filter phases, tools, commands, cautions…"><select id="stageFilter"><option value="all">All SDLC phases</option><option value="planning">Plan & design</option><option value="build">Build</option><option value="verify">Verify</option><option value="release">Release & maintain</option></select></div>
+<div id="phases">
+<article class="phase open" id="phase1" data-stage="planning" data-search="scope requirements problem user story acceptance criteria openspec">
+ <div class="phasehead"><div class="num">01</div><div><h2>Discover the problem and define scope</h2><p>Agree on what must change before touching code.</p><div class="meta"><span class="tag">SDLC: Planning</span><span class="tag">Owner: Product + Engineering</span><span class="tag">Output: accepted requirements</span></div></div><span class="chev">⌄</span></div>
+ <div class="phasebody"><div class="cols">
+  <div class="subpanel"><h4>Actions</h4>
+   <label class="check"><input type="checkbox" class="task"><span>Write the user problem and who experiences it.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Define in-scope and explicitly out-of-scope work.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Write acceptance criteria, edge cases, and failure states.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Record non-functional needs: latency, privacy, accessibility, scale.</span></label>
+  </div>
+  <div class="subpanel"><h4>Example requirement</h4><div class="text"><b>As a user</b>, I can import a CSV or spreadsheet so I can view its records in the app.</div><div class="text"><ul><li>Valid file: show row count and preview.</li><li>Invalid format: explain the reason without crashing.</li><li>Large file: enforce a documented size limit.</li><li>Acceptance: automated tests cover valid, empty, malformed, and oversized files.</li></ul></div></div>
+ </div><div class="note danger"><b>Be careful:</b> vague requirements create rework. Do not promise a feature until permissions, failure behavior, data retention, and acceptance criteria are understood.</div>
+ </div>
+</article>
+<article class="phase" id="phase2" data-stage="planning" data-search="explore openspec proposal spec design architecture api database security">
+ <div class="phasehead"><div class="num">02</div><div><h2>Explore, specify, and design</h2><p>Turn the requirement into a reviewable plan.</p><div class="meta"><span class="tag">SDLC: Analysis & design</span><span class="tag">Output: spec + design + tasks</span></div></div><span class="chev">⌄</span></div>
+ <div class="phasebody"><div class="cols">
+  <div class="subpanel"><h4>OpenSpec workflow</h4>
+   <p class="text">If OpenSpec is installed and integrated with your coding agent, use its supported commands to explore the change, draft a proposal, review the spec/design/tasks, then apply the work. Exact slash-command names depend on the agent integration and installed version.</p>
+   <div class="codehead"><b>Install / initialize (where supported)</b><button class="copy" data-copy="npm install -g @fission-ai/openspec@latest\nopenspec init">Copy commands</button></div>
+   <pre>npm install -g @fission-ai/openspec@latest
+openspec init</pre>
+   <div class="codehead"><b>Example agent actions (not shell commands)</b><button class="copy" data-copy="/opsx:explore [feature]\n/opsx:propose\nReview proposal, specs, design, and tasks before applying.">Copy example</button></div>
+   <pre>/opsx:explore [feature]
+/opsx:propose
+Review proposal, specs, design, and tasks before applying.</pre>
+  </div>
+  <div class="subpanel"><h4>Design review checklist</h4>
+   <label class="check"><input type="checkbox" class="task"><span>Identify affected modules, APIs, database tables, and app screens.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Document data flow, validation, error responses, and permissions.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Plan migration/backward compatibility and rollback.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Split implementation into small, independently testable tasks.</span></label>
+  </div>
+ </div><div class="note"><b>Review before implementation:</b> specs and design documents are proposals, not proof of correctness. A human should check assumptions, data handling, dependencies, and scope before code generation.</div></div>
+</article>
+<article class="phase" id="phase3" data-stage="planning" data-search="tools setup vscode android studio git sdk java go node python env">
+ <div class="phasehead"><div class="num">03</div><div><h2>Prepare the development environment</h2><p>Verify the project’s toolchain before changing files.</p><div class="meta"><span class="tag">SDLC: Environment setup</span><span class="tag">Output: reproducible local setup</span></div></div><span class="chev">⌄</span></div>
+ <div class="phasebody"><div class="cols">
+  <div class="subpanel" data-env="vscode"><h4>VS Code — backend / web</h4><p class="text">Open the repository folder, inspect README and package manifests, install only project-required extensions (language support, formatter, linter, Git, test runner), then use the integrated terminal.</p>
+   <div class="codehead"><b>Baseline checks (run only for your stack)</b><button class="copy" data-copy="git status --short\ngit branch --show-current\ngo version\nnode --version\nnpm --version\npython3 --version">Copy</button></div>
+   <pre>git status --short
+git branch --show-current
+go version          # Go projects
+node --version      # Node projects
+npm --version       # Node projects
+python3 --version   # Python projects</pre>
+   <p class="text">Run only the checks relevant to the repository. Use its pinned version files and package manager.</p>
+  </div>
+  <div class="subpanel" data-env="android"><h4>Android Studio — Android app</h4><p class="text">Install Android Studio and the project-required Android SDK. Open the project root (usually the folder containing <code>settings.gradle</code> or <code>settings.gradle.kts</code>), wait for Gradle sync, and resolve SDK/JDK versions from project documentation.</p>
+   <div class="codehead"><b>Device and build checks</b><button class="copy" data-copy="adb version\nadb devices\n./gradlew tasks\n./gradlew test">Copy</button></div>
+   <pre>adb version
+adb devices
+./gradlew tasks
+./gradlew test</pre>
+   <p class="text">On Windows use <code>gradlew.bat</code>. A connected emulator/device should appear in <code>adb devices</code>.</p>
+  </div>
+ </div><div class="note danger"><b>Be careful:</b> never commit API keys, keystores, signing passwords, production credentials, or local environment files. Do not upgrade SDKs, Gradle, JDK, or dependencies casually; verify compatibility first.</div></div>
+</article>
+<article class="phase" id="phase4" data-stage="build" data-search="implementation vscode android studio code branch commits agent apply">
+ <div class="phasehead"><div class="num">04</div><div><h2>Implement in small, reviewable changes</h2><p>Build one task at a time and keep the diff understandable.</p><div class="meta"><span class="tag">SDLC: Development</span><span class="tag">Output: code + focused commits</span></div></div><span class="chev">⌄</span></div>
+ <div class="phasebody"><div class="cols">
+  <div class="subpanel"><h4>Implementation loop</h4>
+   <label class="check"><input type="checkbox" class="task"><span>Start from a clean branch and confirm the current diff.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Implement one task; avoid unrelated refactors.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Validate inputs at trust boundaries; handle errors explicitly.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Ask AI tools for explanations/tests as needed; inspect every changed line.</span></label>
+  </div>
+  <div class="subpanel"><h4>Git commands</h4>
+   <div class="codehead"><b>Safe starting checks</b><button class="copy" data-copy="git status\n git switch -c feature/short-description\ngit diff --check\ngit diff">Copy</button></div>
+   <pre>git status
+git switch -c feature/short-description
+git diff --check
+git diff</pre>
+   <div class="codehead"><b>Review before commit</b><button class="copy" data-copy="git status --short\ngit diff --check\ngit diff --stat\ngit diff">Copy</button></div>
+   <pre>git status --short
+git diff --check
+git diff --stat
+git diff</pre>
+  </div>
+ </div><div class="note"><b>AI-generated code:</b> treat it as an untrusted contribution. Check licensing and dependency changes, injection risks, authorization checks, concurrency, resource cleanup, and whether tests actually assert the requirement.</div></div>
+</article>
+<article class="phase" id="phase5" data-stage="verify" data-search="testing unit integration end-to-end lint formatting go test gradle android emulator">
+ <div class="phasehead"><div class="num">05</div><div><h2>Test behavior and quality</h2><p>Prove the acceptance criteria with repeatable checks.</p><div class="meta"><span class="tag">SDLC: Testing</span><span class="tag">Output: test evidence</span></div></div><span class="chev">⌄</span></div>
+ <div class="phasebody"><div class="cols">
+  <div class="subpanel" data-env="vscode"><h4>Backend / web examples</h4>
+   <div class="codehead"><b>Go</b><button class="copy" data-copy="gofmt -w .\ngo test ./...\ngo test -race ./...\ngo vet ./...">Copy</button></div>
+   <pre>gofmt -w .
+go test ./...
+go test -race ./...
+go vet ./...</pre>
+   <div class="codehead"><b>Node.js (if scripts exist)</b><button class="copy" data-copy="npm ci\nnpm run lint\nnpm test\nnpm run build">Copy</button></div>
+   <pre>npm ci
+npm run lint
+npm test
+npm run build</pre>
+   <p class="text">Use scripts declared by the repository. Do not run commands blindly if the project uses another package manager.</p>
+  </div>
+  <div class="subpanel" data-env="android"><h4>Android examples</h4>
+   <div class="codehead"><b>Gradle checks</b><button class="copy" data-copy="./gradlew test\n./gradlew lint\n./gradlew assembleDebug">Copy</button></div>
+   <pre>./gradlew test
+./gradlew lint
+./gradlew assembleDebug</pre>
+   <p class="text">Also test on emulator/device: permission denial, rotation, offline state, process recreation, accessibility, and supported Android versions where relevant.</p>
+  </div>
+ </div><div class="subpanel" style="margin-top:14px"><h4>Required test layers</h4>
+  <label class="check"><input type="checkbox" class="task"><span>Unit tests for normal paths, boundaries, and failure cases.</span></label>
+  <label class="check"><input type="checkbox" class="task"><span>Integration tests for database, network, authentication, and external services.</span></label>
+  <label class="check"><input type="checkbox" class="task"><span>End-to-end or manual acceptance tests for critical user journeys.</span></label>
+  <label class="check"><input type="checkbox" class="task"><span>Regression tests reproduce any bug fixed.</span></label>
+ </div><div class="note danger"><b>Do not:</b> remove a failing test just to get a green build, use real customer data in tests, or treat “it compiles” as “it works.” Record the command and result for each important check.</div></div>
+</article>
+<article class="phase" id="phase6" data-stage="verify" data-search="security review secrets dependencies permissions privacy sql injection auth logs">
+ <div class="phasehead"><div class="num">06</div><div><h2>Security, data, and performance review</h2><p>Inspect the risks that ordinary happy-path tests miss.</p><div class="meta"><span class="tag">SDLC: Verification</span><span class="tag">Output: reviewed risk list</span></div></div><span class="chev">⌄</span></div>
+ <div class="phasebody"><div class="cols">
+  <div class="subpanel"><h4>Security checklist</h4>
+   <label class="check"><input type="checkbox" class="task"><span>Authorization is checked on the server for every protected action.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Inputs are validated; SQL uses parameterized queries.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Secrets are in a secret manager or local ignored env file, never source control.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Logs avoid passwords, tokens, personal data, and payment details.</span></label>
+  </div>
+  <div class="subpanel"><h4>Data and reliability checklist</h4>
+   <label class="check"><input type="checkbox" class="task"><span>Migration has backup, compatibility, and rollback strategy.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Timeouts, retries, cancellation, and duplicate requests are considered.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Large inputs, slow network, empty data, and partial failure are tested.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Performance is measured before making optimization claims.</span></label>
+  </div>
+ </div><div class="note danger"><b>High-risk changes:</b> authentication, payments, personal data, database migrations, file uploads, cryptography, permissions, and production infrastructure require explicit peer review and a rollback plan. Never test destructive operations against production.</div></div>
+</article>
+<article class="phase" id="phase7" data-stage="release" data-search="pull request code review ci cd staging release build signing deploy rollback">
+ <div class="phasehead"><div class="num">07</div><div><h2>Review, CI, staging, and release</h2><p>Release only when the change is traceable and reversible.</p><div class="meta"><span class="tag">SDLC: Deployment</span><span class="tag">Output: approved release</span></div></div><span class="chev">⌄</span></div>
+ <div class="phasebody"><div class="cols">
+  <div class="subpanel"><h4>Pull request / CI gate</h4>
+   <label class="check"><input type="checkbox" class="task"><span>PR explains why, what changed, test results, and risks.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>CI runs formatter, lint, tests, build, and relevant security checks.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Reviewer checks diff, API compatibility, migration, and observability.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Deploy to staging and run acceptance smoke tests.</span></label>
+  </div>
+  <div class="subpanel" data-env="android"><h4>Android release notes</h4>
+   <ul class="text"><li>Confirm application ID, version code/name, target SDK, and release variant.</li><li>Use secure signing configuration; never commit signing keys or passwords.</li><li>Test the signed release build, not only the debug build.</li><li>Follow Play Console policy and staged rollout requirements if publishing.</li></ul>
+  </div>
+ </div><div class="codehead" style="margin-top:14px"><b>Pre-release status checks</b><button class="copy" data-copy="git status --short\ngit diff --check\ngit log -5 --oneline">Copy</button></div><pre>git status --short
+git diff --check
+git log -5 --oneline</pre>
+ <div class="note good"><b>Release gate:</b> all critical tests pass, approvals are recorded, migrations and rollback are ready, monitoring is in place, and the team knows who owns the release.</div></div>
+</article>
+<article class="phase" id="phase8" data-stage="release" data-search="monitor maintenance incident metrics logs archive openspec documentation">
+ <div class="phasehead"><div class="num">08</div><div><h2>Monitor, document, and close the loop</h2><p>Confirm production health and preserve what was learned.</p><div class="meta"><span class="tag">SDLC: Operations & maintenance</span><span class="tag">Output: stable service + updated docs</span></div></div><span class="chev">⌄</span></div>
+ <div class="phasebody"><div class="cols">
+  <div class="subpanel"><h4>After deployment</h4>
+   <label class="check"><input type="checkbox" class="task"><span>Check error rate, latency, crash-free sessions, and key business metrics.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Verify logs and alerts are useful and contain no sensitive values.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Confirm support/rollback owner and incident escalation path.</span></label>
+   <label class="check"><input type="checkbox" class="task"><span>Update README, API docs, runbooks, and change/spec status.</span></label>
+  </div>
+  <div class="subpanel"><h4>Close-out evidence</h4><ul class="text"><li>Link to merged pull request and build.</li><li>Test commands and outcomes.</li><li>Migration / rollout / rollback details.</li><li>Known limitations and follow-up issues.</li><li>Archive or mark the spec/change complete using the workflow supported by your installed OpenSpec integration.</li></ul></div>
+ </div><div class="note"><b>Keep the feedback loop:</b> production incidents and user feedback should create new requirements and regression tests, not just one-off fixes.</div></div>
+</article>
+</div>
+<div class="panel" id="finalGate"><h3>Final readiness gate</h3><p class="text">Use this before marking the feature complete. This gate is a checklist aid, not an automated approval.</p><div class="cols">
+ <div><label class="check"><input type="checkbox" class="gate"><span>Every acceptance criterion maps to test evidence.</span></label><label class="check"><input type="checkbox" class="gate"><span>Review and CI are green; no unexplained failures.</span></label><label class="check"><input type="checkbox" class="gate"><span>No secrets or unrelated files in the diff.</span></label></div>
+ <div><label class="check"><input type="checkbox" class="gate"><span>Deployment, migration, monitoring, and rollback are understood.</span></label><label class="check"><input type="checkbox" class="gate"><span>Docs and release notes are updated.</span></label><div id="gateResult" class="result">Readiness: not yet confirmed.</div></div>
+</div></div>
+</section>
+</div>
+<footer class="footer">Interactive local checklist. Progress is saved in this browser when local storage is available. Commands are examples; follow the repository README, pinned tool versions, and your organization’s security/release policies. No command is executed by this page.</footer>
+</main>
+<script>
+const phases=[...document.querySelectorAll('.phase')], tasks=[...document.querySelectorAll('.task')];
+const nav=document.getElementById('navlist');
+phases.forEach((p,i)=>{const b=document.createElement('button');b.innerHTML=`${String(i+1).padStart(2,'0')}. ${p.querySelector('h2').textContent}<small>${p.querySelector('.meta .tag').textContent}</small>`;b.onclick=()=>{p.classList.add('open');p.scrollIntoView({behavior:'smooth',block:'start'});setActive(p)};nav.appendChild(b);
+p.querySelector('.phasehead').addEventListener('click',()=>p.classList.toggle('open'));});
+function setActive(p){[...nav.children].forEach((b,i)=>b.classList.toggle('active',phases[i]===p))}
+function update(){const all=[...document.querySelectorAll('.task,.doneGate,.gate')];let n=all.filter(x=>x.checked).length;document.getElementById('doneCount').textContent=`${n} / ${all.length}`;document.getElementById('progressBar').style.width=(n/all.length*100)+'%';document.querySelectorAll('.check input').forEach(x=>x.parentElement.classList.toggle('done',x.checked));const gates=[...document.querySelectorAll('.gate')];document.getElementById('gateResult').textContent=gates.every(x=>x.checked)?'Readiness: all listed checks confirmed.':'Readiness: not yet confirmed.';try{localStorage.setItem('openspec-roadmap-state',JSON.stringify(all.map(x=>x.checked)))}catch(e){}}
+function load(){try{const a=JSON.parse(localStorage.getItem('openspec-roadmap-state')||'[]');const all=[...document.querySelectorAll('.task,.doneGate,.gate')];all.forEach((x,i)=>x.checked=!!a[i])}catch(e){}update()}
+document.querySelectorAll('input[type=checkbox]').forEach(x=>x.addEventListener('change',update));
+document.getElementById('expandAll').onclick=()=>phases.forEach(p=>p.classList.add('open'));
+document.getElementById('collapseAll').onclick=()=>phases.forEach(p=>p.classList.remove('open'));
+document.getElementById('reset').onclick=()=>{if(confirm('Clear all checklist progress saved by this page?')){document.querySelectorAll('input[type=checkbox]').forEach(x=>x.checked=false);try{localStorage.removeItem('openspec-roadmap-state')}catch(e){}update()}};
+document.querySelectorAll('.copy').forEach(b=>b.onclick=async()=>{const txt=b.dataset.copy||b.closest('.subpanel')?.querySelector('pre')?.textContent||'';try{await navigator.clipboard.writeText(txt);b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1200)}catch(e){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1200)}});
+function filter(){const q=document.getElementById('search').value.toLowerCase(),stage=document.getElementById('stageFilter').value;phases.forEach(p=>{const ok=p.textContent.toLowerCase().includes(q)&&(stage==='all'||p.dataset.stage===stage);p.classList.toggle('hide',!ok)})}
+document.getElementById('search').addEventListener('input',filter);document.getElementById('stageFilter').addEventListener('change',filter);
+function envUpdate(){const vs=document.getElementById('useVS').checked,an=document.getElementById('useAndroid').checked;document.querySelectorAll('[data-env=vscode]').forEach(x=>x.classList.toggle('hide',!vs));document.querySelectorAll('[data-env=android]').forEach(x=>x.classList.toggle('hide',!an))}
+document.getElementById('useVS').addEventListener('change',envUpdate);document.getElementById('useAndroid').addEventListener('change',envUpdate);load();envUpdate();
+</script>
+</body></html>
