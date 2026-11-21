@@ -1,91 +1,79 @@
-# Engineering SDLC Roadmap
+# OpenSpec – Specification-Driven Development Roadmap
 
-An interactive developer guide covering the complete Software Development Life Cycle (SDLC), from requirement analysis to production deployment and maintenance.
+A practical, interactive engineering workflow for building software through **Specification-Driven Development (SDD)** using OpenSpec.
+
+This project provides a structured approach to understanding requirements, exploring solutions, defining specifications, designing implementations, executing development tasks, and verifying completed changes.
 
 ## Live Demo
 
-**[View Interactive SDLC Roadmap](https://akarsh1810.github.io/sdlc-roadmap/)**
+**[View Interactive Development Roadmap](https://akarsh1810.github.io/sdlc-roadmap/)**
 
-## Overview
+## What Is This Project?
 
-This project provides a structured, practical development workflow for software engineers. It explains each SDLC phase with actionable tasks, development tools, terminal commands, expected outcomes, verification steps, and important precautions.
+Specification-Driven Development (SDD) is an approach where software development begins with clearly defined requirements and specifications rather than immediately writing code.
 
-## SDLC Phases
+This roadmap demonstrates how developers can use OpenSpec alongside development environments such as VS Code and Android Studio to manage the complete development lifecycle.
 
-| Phase | Description |
-|---|---|
-| 01. Discovery & Planning | Define requirements, scope, user stories, and acceptance criteria. |
-| 02. Exploration & Design | Architecture, technical specifications, API design, and OpenSpec workflow. |
-| 03. Environment Setup | Configure VS Code, Android Studio, SDKs, dependencies, and development tools. |
-| 04. Implementation | Development workflow, Git branching, code changes, and AI-assisted development. |
-| 05. Testing & Quality Assurance | Unit testing, integration testing, end-to-end testing, and regression testing. |
-| 06. Security & Reliability | Authentication, authorization, secrets management, database safety, and performance. |
-| 07. Review & Deployment | Pull requests, CI/CD, staging, production releases, and rollback strategies. |
-| 08. Monitoring & Maintenance | Logs, metrics, incident handling, documentation, and continuous improvement. |
+## Development Workflow
 
-## Key Features
+| Phase | Activity | Expected Output |
+|---|---|---|
+| 01. Initialization | Install OpenSpec CLI and initialize the project | OpenSpec project configuration |
+| 02. Exploration | Understand requirements, explore solutions, and identify technical considerations | Explored requirements and decisions |
+| 03. Specification & Proposal | Convert requirements into structured specifications and proposals | Proposal, specifications, and design |
+| 04. Verification | Review requirements, logic, architecture, and implementation tasks | Validated specifications and task breakdown |
+| 05. Implementation | Execute approved development tasks and implement changes | Working implementation |
+| 06. Testing & Validation | Run tests and verify implementation against specifications | Test results and verified behavior |
+| 07. Review & Deployment | Review code, integrate changes, and prepare release | Reviewed and deployable changes |
+| 08. Archival & Maintenance | Complete the change workflow and maintain documentation | Archived change and updated project context |
 
-- Interactive and expandable SDLC phases.
-- Step-by-step development instructions.
-- VS Code and Android Studio workflows.
-- Practical terminal commands with copy functionality.
-- OpenSpec-driven development workflow.
-- Git and version control guidance.
-- Testing and debugging checklists.
-- Security and deployment precautions.
-- Interactive task completion and progress tracking.
-- Searchable development phases.
-- Responsive desktop and mobile interface.
-
-## Technology Stack
-
-- HTML5
-- CSS3
-- JavaScript
-- Git and GitHub
-- GitHub Pages
-
-## Development Tools Covered
+## Tools & Development Environment
 
 | Tool | Purpose |
 |---|---|
-| Visual Studio Code | Backend and web development |
+| OpenSpec CLI | Specification-driven development workflow |
+| VS Code | Backend development, specifications, and code editing |
 | Android Studio | Android application development |
-| Git | Version control |
-| GitHub | Source code management |
-| OpenSpec | Specification-driven development |
-| Gradle | Android build automation |
-| Terminal / CLI | Development and testing commands |
+| Git | Version control and change tracking |
+| GitHub | Repository management and collaboration |
+| Terminal / CLI | Project initialization, commands, builds, and testing |
+| AI Coding Assistant | Requirement exploration, specification drafting, and implementation assistance |
 
-## Getting Started
+## OpenSpec Initialization
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/akarsh1810/sdlc-roadmap.git
-```
-
-### 2. Navigate to the project
+Install OpenSpec:
 
 ```bash
-cd sdlc-roadmap
+npm install -g @fission-ai/openspec@latest
 ```
 
-### 3. Open in VS Code
+Initialize it in your project:
 
 ```bash
-code .
+openspec init
 ```
 
-Alternatively, open `index.html` directly in your browser.
+Follow the initialization prompts and select the integrations supported by your development environment.
 
-### 4. Start using the roadmap
+## Development Principles
 
-- Expand each SDLC phase.
-- Follow the instructions in sequence.
-- Copy relevant commands into your terminal.
-- Complete the checklists.
-- Track your development progress.
+- Define requirements before implementation.
+- Explore the problem before selecting a solution.
+- Maintain clear and reviewable specifications.
+- Break large changes into manageable development tasks.
+- Review generated specifications before implementation.
+- Use VS Code and Android Studio according to project requirements.
+- Validate implementation against acceptance criteria.
+- Test changes before merging or deploying.
+- Keep specifications and project documentation updated.
+
+## Key Objectives
+
+1. Establish a repeatable specification-driven development workflow.
+2. Improve requirement clarity and reduce implementation ambiguity.
+3. Maintain alignment between specifications, design, and code.
+4. Use AI-assisted development with human review and verification.
+5. Improve code quality, traceability, and engineering productivity.
 
 ## Project Structure
 
@@ -94,21 +82,22 @@ sdlc-roadmap/
 │
 ├── index.html
 └── README.md
-
 ```
 
 ## Deployment
 
-This project is hosted using GitHub Pages.
-
-Every push to the configured production branch can trigger an automatic deployment.
+The interactive roadmap is hosted using GitHub Pages.
 
 **Live Website:** https://akarsh1810.github.io/sdlc-roadmap/
 
-## Project Objective
+Changes pushed to the configured GitHub Pages branch are automatically deployed.
 
-The objective is to provide software developers with a practical, structured, and repeatable engineering workflow that encourages better planning, maintainable code, systematic testing, secure development, and reliable production releases.
+## Important Note
+
+OpenSpec command examples and workflows may vary depending on the installed version and AI coding assistant integration. Always refer to the official documentation for supported commands and configuration.
+
+**Official Documentation:** https://github.com/Fission-AI/OpenSpec
 
 ---
 
-**Built as a practical reference for end-to-end software engineering and SDLC workflows.**
+**Project Focus:** Specification-Driven Development | OpenSpec | AI-Assisted Engineering | Structured Software Development
