@@ -4,10 +4,6 @@ A practical, interactive engineering workflow for building software through **Sp
 
 This project provides a structured approach to understanding requirements, exploring solutions, defining specifications, designing implementations, executing development tasks, and verifying completed changes.
 
-## Live Demo
-
-**[View Interactive Development Roadmap](https://github.com/Akarsh1810/spec-development-interactive-roadmap)**
-
 ## What Is This Project?
 
 Specification-Driven Development (SDD) is an approach where software development begins with clearly defined requirements and specifications rather than immediately writing code.
@@ -88,7 +84,7 @@ sdlc-roadmap/
 
 The interactive roadmap is hosted using GitHub Pages.
 
-**Live Website:** https://github.com/Akarsh1810/spec-development-interactive-roadmap
+**Live Website:** https://akarsh1810.github.io/spec-development-interactive-roadmap/
 
 Changes pushed to the configured GitHub Pages branch are automatically deployed.
 
