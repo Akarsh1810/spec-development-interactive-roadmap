@@ -6,7 +6,7 @@ This project provides a structured approach to understanding requirements, explo
 
 ## Live Demo
 
-**[View Interactive Development Roadmap](https://akarsh1810.github.io/sdlc-roadmap/)**
+**[View Interactive Development Roadmap](https://github.com/Akarsh1810/spec-development-interactive-roadmap)**
 
 ## What Is This Project?
 
@@ -88,7 +88,7 @@ sdlc-roadmap/
 
 The interactive roadmap is hosted using GitHub Pages.
 
-**Live Website:** https://akarsh1810.github.io/sdlc-roadmap/
+**Live Website:** https://github.com/Akarsh1810/spec-development-interactive-roadmap
 
 Changes pushed to the configured GitHub Pages branch are automatically deployed.
 
