@@ -2,10 +2,6 @@
 
 An interactive developer guide covering the complete Software Development Life Cycle (SDLC), from requirement analysis to production deployment and maintenance.
 
-## Full-Page Preview
-
-![Engineering SDLC Roadmap](./SDLC_Roadmap_Full_Page.png)
-
 ## Live Demo
 
 **[View Interactive SDLC Roadmap](https://akarsh1810.github.io/sdlc-roadmap/)**
@@ -97,8 +93,8 @@ Alternatively, open `index.html` directly in your browser.
 sdlc-roadmap/
 │
 ├── index.html
-├── README.md
-└── SDLC_Roadmap_Full_Page.png
+└── README.md
+
 ```
 
 ## Deployment
